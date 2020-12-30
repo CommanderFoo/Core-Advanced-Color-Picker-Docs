@@ -1,0 +1,42 @@
+site_name: Advanced Color Picker Documentation
+site_description: Documentation for the Advanced Color Picker component on Community Content
+docs_dir: docs
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.instant
+    - toc.integrate
+    - navigation.expand
+  font:
+      text: Lato
+      code: JetBrains Mono
+  
+nav:
+  - Documentation:
+    - index.md
+    - quick-start.md
+    - contexts.md
+    - hierarchy.md
+    - mesh-root.md
+    - mesh-objects.md
+    - ignore-mesh-objects.md
+    - add-modify-colors.md
+    - object-picking.md
+    - Examples:
+        - examples/intro.md
+        - examples/example1.md
+        - examples/example2.md
+        - examples/example3.md
+        - examples/example4.md
+        - examples/example5.md
+  - Core Games:
+    - https://coregames.com
+
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.superfences
+  - markdown.extensions.codehilite:
+      guess_lang: false
