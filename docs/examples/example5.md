@@ -13,7 +13,7 @@ Player Data has a limit of how much can be stored, so if you are letting the pla
 
 For simple objects where it may be a hat, or some clothing, then this should be fine.
 
-This example storage an object that is built up of the mesh ids and the color picked.  We send the data to a server script which handles saving to Player Storage.  When a player logs back in, we convert the data into a string and use a networked property so we can get it to the client.
+This example stores an object that is built up of the mesh ids and the color picked.  We send the data to a server script which handles saving to Player Storage.  When a player logs back in, we convert the data into a string and use a networked property so we can get it to the client.
 
 See [Storage](https://docs.coregames.com/core_api/#storage) for more information.
 
