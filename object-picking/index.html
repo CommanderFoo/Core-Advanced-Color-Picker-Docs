@@ -369,18 +369,31 @@
 
 
 
+  <li class="md-nav__item">
+    <a href="../events/" class="md-nav__link">
+      Events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
   
   <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10" data-md-state="indeterminate" type="checkbox" id="nav-1-10" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11" data-md-state="indeterminate" type="checkbox" id="nav-1-11" checked>
     
-    <label class="md-nav__link" for="nav-1-10">
+    <label class="md-nav__link" for="nav-1-11">
       Examples
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Examples" data-md-level="2">
-      <label class="md-nav__title" for="nav-1-10">
+      <label class="md-nav__title" for="nav-1-11">
         <span class="md-nav__icon md-icon"></span>
         Examples
       </label>
@@ -545,7 +558,7 @@
                 
                 <h1 id="object-picking">Object Picking</h1>
 <p>The componet has a simple API where you can pass in a <code>mesh_root</code> dynamically.  This is a good idea if you want your player to be able to pick different objects to color.</p>
-<p>See example 4 that demostrates how to switch objects.</p>
+<p>See <a href="/examples/example4">example 4</a> that demostrates how to switch objects.</p>
 <p>Example code of how we can connect a <code>pressed</code> event to a button and when clicked it will change the <code>mesh_root</code> of the Advanced Color Picker component.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
@@ -559,18 +572,24 @@
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">container</span> <span class="o">=</span> <span class="n">script</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;button_container&quot;</span><span class="p">):</span><span class="n">WaitForObject</span><span class="p">()</span>
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">container</span> <span class="o">=</span> <span class="n">script</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;button_container&quot;</span><span class="p">):</span><span class="n">WaitForObject</span><span class="p">()</span>
 
 <span class="c1">-- A reference to the color picker component</span>
+
 <span class="kd">local</span> <span class="n">color_picker</span> <span class="o">=</span> <span class="n">script</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;color_picker&quot;</span><span class="p">):</span><span class="n">WaitForObject</span><span class="p">()</span>
 
 <span class="kr">for</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">#</span><span class="n">container</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">()</span> <span class="kr">do</span>
     <span class="kd">local</span> <span class="n">button</span> <span class="o">=</span> <span class="n">container</span><span class="p">:</span><span class="n">GetChildren</span><span class="p">()[</span><span class="n">b</span><span class="p">]</span>
 
     <span class="n">button</span><span class="p">.</span><span class="n">pressedEvent</span><span class="p">:</span><span class="n">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">()</span>
-        <span class="c1">-- On pressed we give the color picker component a new mesh_root</span>
-<span class="hll">        <span class="n">color_picker</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">set_mesh_root</span><span class="p">(</span><span class="n">button</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;mesh_root&quot;</span><span class="p">))</span>
-</span>    <span class="kr">end</span><span class="p">)</span>
+<span class="hll">
+</span>        <span class="c1">-- On pressed we give the color picker component a new mesh_root</span>
+
+        <span class="n">color_picker</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">set_mesh_root</span><span class="p">(</span><span class="n">button</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;mesh_root&quot;</span><span class="p">))</span>
+    <span class="kr">end</span><span class="p">)</span>
 <span class="kr">end</span>
 </code></pre></div>
 </td></tr></table>
@@ -607,13 +626,13 @@
           </a>
         
         
-          <a href="../examples/intro/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../events/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Trying the Examples
+                Events
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

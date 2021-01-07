@@ -359,6 +359,19 @@
           
 
 
+
+  <li class="md-nav__item">
+    <a href="../../events/" class="md-nav__link">
+      Events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   
 
 
@@ -366,14 +379,14 @@
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10" type="checkbox" id="nav-1-10" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11" type="checkbox" id="nav-1-11" checked>
     
-    <label class="md-nav__link" for="nav-1-10">
+    <label class="md-nav__link" for="nav-1-11">
       Examples
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Examples" data-md-level="2">
-      <label class="md-nav__title" for="nav-1-10">
+      <label class="md-nav__title" for="nav-1-11">
         <span class="md-nav__icon md-icon"></span>
         Examples
       </label>
@@ -483,15 +496,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-server-script" class="md-nav__link">
-    The Server Script
+  <a href="#client-script" class="md-nav__link">
+    Client Script
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-client-script" class="md-nav__link">
-    The Client Script
+  <a href="#server-script" class="md-nav__link">
+    Server Script
   </a>
   
 </li>
@@ -582,88 +595,18 @@
                 
                 
                 <h1 id="saving-colors">Saving Colors</h1>
-<p>This example is an extra bonus but more advanced.  </p>
+<p>This is one example of how you could handle saving colors for your players so that they persist.</p>
 <p>What's the point of allowing the players to change colors of an object if they don't save?</p>
-<p>So some important things to note about this example:</p>
+<p>Some important things to note about this example:</p>
 <ol>
 <li>Enable <code>saving_enabled</code> on the <code>Advanced_Color_Picker_Save_Load_Client</code> script.  It is disabled by default.</li>
 <li>Your mesh root needs to be networked and have a networked property called <code>data</code>.  See the example by looking at <code>Mesh Root</code>.</li>
 </ol>
 <p>Player Data has a limit of how much can be stored, so if you are letting the player color the world, expect to hit the limit.</p>
 <p>For simple objects where it may be a hat, or some clothing, then this should be fine.</p>
-<p>This example stores an object that is built up of the mesh ids and the color picked.  We send the data to a server script which handles saving to Player Storage.  When a player logs back in, we convert the data into a string and use a networked property so we can get it to the client.</p>
+<p>This example stores an object that is built up of the mesh ids and the color picked by the player.  The data is sent to a server script which handles saving to Player Storage.  When a player logs back in, we convert the data into a string and use a networked property so we can get it to the client.</p>
 <p>See <a href="https://docs.coregames.com/core_api/#storage">Storage</a> for more information.</p>
-<h2 id="the-server-script">The Server Script</h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">mesh_root</span> <span class="o">=</span> <span class="n">script</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;mesh_root&quot;</span><span class="p">):</span><span class="n">WaitForObject</span><span class="p">()</span>
-<span class="kd">local</span> <span class="n">enable_loading</span> <span class="o">=</span> <span class="n">script</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;enable_loading&quot;</span><span class="p">)</span>
-
-<span class="c1">-- Turns a table of that was stored in the player storage into a string so we can</span>
-<span class="c1">-- set the networked property value.</span>
-
-<span class="kr">function</span> <span class="nf">stringify_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">str</span> <span class="o">=</span> <span class="p">{}</span>
-
-    <span class="kr">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="kr">do</span>
-        <span class="nb">table.insert</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="o">#</span><span class="n">str</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;|%s|%.2f|%.2f|%.2f&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">r</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">b</span><span class="p">))</span>
-    <span class="kr">end</span>
-
-    <span class="kr">return</span> <span class="nb">table.concat</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
-<span class="kr">end</span>
-
-<span class="c1">-- When player joins the game, grab their data, turn it into a string, and send it to them</span>
-<span class="c1">-- via a networked property.</span>
-
-<span class="n">Game</span><span class="p">.</span><span class="n">playerJoinedEvent</span><span class="p">:</span><span class="n">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Storage</span><span class="p">.</span><span class="n">GetPlayerData</span><span class="p">(</span><span class="n">player</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
-
-    <span class="n">mesh_root</span><span class="p">:</span><span class="n">SetNetworkedCustomProperty</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">stringify_data</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="kr">end</span><span class="p">)</span>
-
-<span class="c1">-- Handles saving the color to storage for the player. </span>
-
-<span class="n">Events</span><span class="p">.</span><span class="n">ConnectForPlayer</span><span class="p">(</span><span class="s2">&quot;on_color_picker_save&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
-    <span class="kd">local</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Storage</span><span class="p">.</span><span class="n">GetPlayerData</span><span class="p">(</span><span class="n">player</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
-
-    <span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
-
-    <span class="n">Storage</span><span class="p">.</span><span class="n">SetPlayerData</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="kr">end</span><span class="p">)</span>
-</code></pre></div>
-</td></tr></table>
-<h2 id="the-client-script">The Client Script</h2>
+<h2 id="client-script">Client Script</h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -825,6 +768,76 @@
 
     <span class="kr">return</span> <span class="n">obj</span>
 <span class="kr">end</span>
+</code></pre></div>
+</td></tr></table>
+<h2 id="server-script">Server Script</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kd">local</span> <span class="n">mesh_root</span> <span class="o">=</span> <span class="n">script</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;mesh_root&quot;</span><span class="p">):</span><span class="n">WaitForObject</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">enable_loading</span> <span class="o">=</span> <span class="n">script</span><span class="p">:</span><span class="n">GetCustomProperty</span><span class="p">(</span><span class="s2">&quot;enable_loading&quot;</span><span class="p">)</span>
+
+<span class="c1">-- Turns a table of that was stored in the player storage into a string so we can</span>
+<span class="c1">-- set the networked property value.</span>
+
+<span class="kr">function</span> <span class="nf">stringify_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">str</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="kr">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="kr">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="kr">do</span>
+        <span class="nb">table.insert</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="o">#</span><span class="n">str</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;|%s|%.2f|%.2f|%.2f&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">r</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">b</span><span class="p">))</span>
+    <span class="kr">end</span>
+
+    <span class="kr">return</span> <span class="nb">table.concat</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- When player joins the game, grab their data, turn it into a string, and send it to them</span>
+<span class="c1">-- via a networked property.</span>
+
+<span class="n">Game</span><span class="p">.</span><span class="n">playerJoinedEvent</span><span class="p">:</span><span class="n">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Storage</span><span class="p">.</span><span class="n">GetPlayerData</span><span class="p">(</span><span class="n">player</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+
+    <span class="n">mesh_root</span><span class="p">:</span><span class="n">SetNetworkedCustomProperty</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">stringify_data</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="c1">-- Handles saving the color to storage for the player. </span>
+
+<span class="n">Events</span><span class="p">.</span><span class="n">ConnectForPlayer</span><span class="p">(</span><span class="s2">&quot;on_color_picker_save&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+    <span class="kd">local</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Storage</span><span class="p">.</span><span class="n">GetPlayerData</span><span class="p">(</span><span class="n">player</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+
+    <span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
+
+    <span class="n">Storage</span><span class="p">.</span><span class="n">SetPlayerData</span><span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
                 

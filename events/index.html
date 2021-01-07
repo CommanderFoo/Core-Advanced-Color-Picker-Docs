@@ -16,7 +16,7 @@
     
     
       
-        <title>Ignoring Mesh Objects - Advanced Color Picker Documentation</title>
+        <title>Events - Advanced Color Picker Documentation</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ignoring-mesh-objects" class="md-skip">
+        <a href="#events" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Ignoring Mesh Objects
+              Events
             
           </span>
         </div>
@@ -320,20 +320,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../ignore-mesh-objects/" class="md-nav__link">
       Ignoring Mesh Objects
     </a>
-    
   </li>
 
         
@@ -368,11 +359,20 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../events/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Events
     </a>
+    
   </li>
 
         
@@ -556,22 +556,35 @@
               
                 
                 
-                <h1 id="ignoring-mesh-objects">Ignoring Mesh Objects</h1>
-<p>In some cases you may not want specific mesh objects or groups of mesh objects to be colored.  This is very easy to do by using custom properties.</p>
-<p>For any mesh object or folder of mesh objects, you can apply a custom property called <code>ignore_color_picker</code>.  When ticked, this will tell the component that this mesh object or folder of mesh objects needs to be ignored.</p>
-<p>In this example I want to disable the <code>Head</code> mesh object from being colored, but still allow the eyes to be colored.</p>
-<p>Click on the object to make it active.</p>
-<p><img alt="" src="../images/ignore_object_1.png" /></p>
-<p>In the properties panel at the bottom, you will see a button called <code>Add Custom Property</code>.</p>
-<p><img alt="" src="../images/ignore_object_2.png" /></p>
-<p>Click on the button and add a <code>Bool</code> property.</p>
-<p><img alt="" src="../images/ignore_object_3.png" /></p>
-<p>A window will popup where you need to name the custom property.  In this case the name of the property needs to be <code>ignore_color_picker</code>.</p>
-<p><img alt="" src="../images/ignore_object_4.png" /></p>
-<p>The new property will now show up.  Click the checkbox to enable it.  The component will see this property and if it is ticked then this mesh object or folder of mesh objects will be ignored.</p>
-<p><img alt="" src="../images/ignore_object_5.png" /></p>
-<p>So now if I look at my color picker hierarchy, the Head mesh object will no longer be an option to color.</p>
-<p><img alt="" src="../images/ignore_object_6.png" /></p>
+                <h1 id="events">Events</h1>
+<p>The Advanced Color Picker will <a href="https://docs.coregames.com/core_api/#events">broadcast</a> an event when the color has been picked for a mesh object.</p>
+<p><strong>Event:</strong> <code>on_color_picker_object_changed</code></p>
+<p>There are 3 parameters you can use in your connected event.</p>
+<ol>
+<li>
+<p><strong>Current Mesh Id</strong><br />
+   The Id of the mesh that has been modified.</p>
+</li>
+<li>
+<p><strong>Color</strong>  <br />
+   The color the mesh was modified too.</p>
+</li>
+<li>
+<p><strong>Current Mesh</strong><br />
+    The actual mesh object that is being modified</p>
+</li>
+</ol>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Events</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s2">&quot;on_color_picker_object_changed&quot;</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span><span class="n">mesh_id</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">mesh</span><span class="p">)</span>
+
+    <span class="c1">-- Do something here :D</span>
+
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
                 
               
               
@@ -590,7 +603,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../mesh-objects/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../object-picking/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -599,19 +612,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Setup Mesh Objects
+                Object Picking
               </div>
             </div>
           </a>
         
         
-          <a href="../add-modify-colors/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../examples/intro/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Modifying the Palette
+                Trying the Examples
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

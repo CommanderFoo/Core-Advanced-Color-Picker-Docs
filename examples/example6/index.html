@@ -359,6 +359,19 @@
           
 
 
+
+  <li class="md-nav__item">
+    <a href="../../events/" class="md-nav__link">
+      Events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   
 
 
@@ -366,14 +379,14 @@
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-10" type="checkbox" id="nav-1-10" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1-11" type="checkbox" id="nav-1-11" checked>
     
-    <label class="md-nav__link" for="nav-1-10">
+    <label class="md-nav__link" for="nav-1-11">
       Examples
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Examples" data-md-level="2">
-      <label class="md-nav__title" for="nav-1-10">
+      <label class="md-nav__title" for="nav-1-11">
         <span class="md-nav__icon md-icon"></span>
         Examples
       </label>
@@ -473,9 +486,45 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Syncing Colors with Clients
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Syncing Colors with Clients
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#client-script" class="md-nav__link">
+    Client Script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-script" class="md-nav__link">
+    Server Script
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -554,31 +603,34 @@
 <p>Take a look at the <code>Mesh Root</code> folder.  You will see there are 2 networked properties.</p>
 <p><img alt="" src="../../images/example_6.png" /></p>
 <ul>
-<li><code>mesh_ref</code></li>
-</ul>
-<p>When a mesh has changed color, the server will set this property to the reference of the mesh.  </p>
-<ul>
-<li><code>mesh_color</code></li>
-</ul>
-<p>The server will also set the value of this property to the color that the mesh needs to be.</p>
-<p>There is an event we can bind too that is broadcasted from the Advanced Color Picker called <code>on_color_picker_object_changed</code>.  When a client changes the color of a mesh, this is broadcasted and any script that connects to this event will receive 3 parameters.</p>
-<ul>
-<li>Current Mesh Id</li>
-</ul>
-<p>The Id of the mesh that has been modified.</p>
-<ul>
-<li>Color</li>
-</ul>
-<p>The color the mesh was modified too.</p>
-<ul>
 <li>
-<p>Current Mesh</p>
-<p>The actual mesh object that is being modified</p>
+<p><strong><code>mesh_ref</code></strong><br />
+   When a mesh has changed color, the server will set this property to the reference of the mesh.  </p>
+</li>
+<li>
+<p><strong><code>mesh_color</code></strong><br />
+   The server will also set the value of this property to the color that the mesh needs to be.</p>
 </li>
 </ul>
-<p>What this example does is listens for the event <code>on_color_picker_object_changed</code> and then broadcasts to the server.  The broadcast sends the color and a mesh reference.  The server will listen for the event and then set the networked property of the <code>Mesh Root</code>.</p>
+<p>There is an event we can connect to that is broadcasted from the Advanced Color Picker called <code>on_color_picker_object_changed</code>.  When a client changes the color of a mesh, this is broadcasted and any script that connects to this event will receive 3 parameters.</p>
+<ul>
+<li>
+<p><strong>Current Mesh Id</strong><br />
+   The Id of the mesh that has been modified.</p>
+</li>
+<li>
+<p><strong>Color</strong>  <br />
+   The color the mesh was modified too.</p>
+</li>
+<li>
+<p><strong>Current Mesh</strong><br />
+    The actual mesh object that is being modified</p>
+</li>
+</ul>
+<p>What this example does is listens for the event <code>on_color_picker_object_changed</code> and then broadcasts to the server the mesh reference and color.  The server will listen for the event and then set the networked property of the <code>Mesh Root</code>.</p>
 <p>Let's look at the scripts to see just how easy this is to implement.</p>
 <p>Here is the client script that handles sending the data to the server, and listening for when the networked properties get changed.</p>
+<h2 id="client-script">Client Script</h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -615,6 +667,7 @@
 </code></pre></div>
 </td></tr></table>
 <p>We listen for when the property <code>mesh_color</code> changes.  Since this is the last property to get updated, we will already have the <code>mesh_ref</code> set.  If we do this in reverse, then <code>mesh_color</code> would be black.</p>
+<h2 id="server-script">Server Script</h2>
 <p>Finally the server script which updates the networked properties.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
