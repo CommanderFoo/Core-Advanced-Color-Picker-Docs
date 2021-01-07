@@ -14,33 +14,30 @@ Take a look at the `Mesh Root` folder.  You will see there are 2 networked prope
 
 ![](../images/example_6.png)
 
- - `mesh_ref`
-
+ - **`mesh_ref`**  
    When a mesh has changed color, the server will set this property to the reference of the mesh.  
 
- - `mesh_color`
- 
+ - **`mesh_color`**  
    The server will also set the value of this property to the color that the mesh needs to be.
 
-There is an event we can bind too that is broadcasted from the Advanced Color Picker called `on_color_picker_object_changed`.  When a client changes the color of a mesh, this is broadcasted and any script that connects to this event will receive 3 parameters.
+There is an event we can connect to that is broadcasted from the Advanced Color Picker called `on_color_picker_object_changed`.  When a client changes the color of a mesh, this is broadcasted and any script that connects to this event will receive 3 parameters.
 
- - Current Mesh Id
-   
+ - **Current Mesh Id**  
    The Id of the mesh that has been modified.
 
- - Color
-  
+ - **Color**    
    The color the mesh was modified too.
 
- - Current Mesh
-
+ - **Current Mesh**  
 	The actual mesh object that is being modified
 
-What this example does is listens for the event `on_color_picker_object_changed` and then broadcasts to the server.  The broadcast sends the color and a mesh reference.  The server will listen for the event and then set the networked property of the `Mesh Root`.
+What this example does is listens for the event `on_color_picker_object_changed` and then broadcasts to the server the mesh reference and color.  The server will listen for the event and then set the networked property of the `Mesh Root`.
 
 Let's look at the scripts to see just how easy this is to implement.
 
 Here is the client script that handles sending the data to the server, and listening for when the networked properties get changed.
+
+## Client Script
 
 ```lua
 -- Reference to the Mesh Root object so we can set the read the properties later on.
@@ -63,6 +60,8 @@ end)
 ```
 
 We listen for when the property `mesh_color` changes.  Since this is the last property to get updated, we will already have the `mesh_ref` set.  If we do this in reverse, then `mesh_color` would be black.
+
+## Server Script
 
 Finally the server script which updates the networked properties.
 

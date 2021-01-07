@@ -2,7 +2,7 @@
 
 To try out the examples you need to do 2 important things first.
 
-1. Enable `Player Storage` on your Game Settings object (use in a later example).
+1. Enable `Player Storage` on your Game Settings object (used in a later example).
 
 	![](../images/player_storage.png)
 

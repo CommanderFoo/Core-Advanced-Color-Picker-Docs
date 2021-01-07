@@ -24,6 +24,7 @@ nav:
     - ignore-mesh-objects.md
     - add-modify-colors.md
     - object-picking.md
+    - events.md
     - Examples:
         - examples/intro.md
         - examples/example1.md

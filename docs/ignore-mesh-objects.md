@@ -4,7 +4,7 @@ In some cases you may not want specific mesh objects or groups of mesh objects t
 
 For any mesh object or folder of mesh objects, you can apply a custom property called `ignore_color_picker`.  When ticked, this will tell the component that this mesh object or folder of mesh objects needs to be ignored.
 
-In this example I want to disable the `Head` from being colored, but still allow the eyes to be colored.
+In this example I want to disable the `Head` mesh object from being colored, but still allow the eyes to be colored.
 
 Click on the object to make it active.
 
@@ -26,6 +26,6 @@ The new property will now show up.  Click the checkbox to enable it.  The compon
 
 ![](images/ignore_object_5.png)
 
-So now if I look at my color picker hierarchy, the Head will no longer be an option to color.
+So now if I look at my color picker hierarchy, the Head mesh object will no longer be an option to color.
 
 ![](images/ignore_object_6.png)
