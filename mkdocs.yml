@@ -2,6 +2,9 @@ site_name: Advanced Color Picker Documentation
 site_description: Documentation for the Advanced Color Picker component on Community Content
 docs_dir: docs
 theme:
+  palette:
+    scheme: slate
+    primary: blue
   name: material
   features:
     - navigation.tabs
