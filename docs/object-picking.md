@@ -6,7 +6,7 @@ See [example 4](/examples/example4) that demostrates how to switch objects.
 
 Example code of how we can connect a `pressed` event to a button and when clicked it will change the `mesh_root` of the Advanced Color Picker component.
 
-```lua hl_lines="13"
+```lua hl_lines="14"
 local container = script:GetCustomProperty("button_container"):WaitForObject()
 
 -- A reference to the color picker component
