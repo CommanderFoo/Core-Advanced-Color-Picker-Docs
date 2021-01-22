@@ -16,7 +16,7 @@
     
     
       
-        <title>Object Switching - Advanced Color Picker Documentation</title>
+        <title>UI Coloring - Advanced Color Picker Documentation</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#object-switching" class="md-skip">
+        <a href="#ui-coloring" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Object Switching
+              UI Coloring
             
           </span>
         </div>
@@ -454,20 +454,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../example4/" class="md-nav__link">
       Object Switching
     </a>
-    
   </li>
 
         
@@ -502,11 +493,20 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../example7/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       UI Coloring
     </a>
+    
   </li>
 
         
@@ -575,13 +575,18 @@
               
                 
                 
-                <h1 id="object-switching">Object Switching</h1>
-<p>This example shows you how to handle object switching.  Once setup, you will be able to switch between the first 3 examples by clicking on the example buttons.</p>
-<p>Expand the <code>Client</code> folder under the <code>Advanced Color Picker</code> folder and take a look the custom properties on the <code>Advanced_Color_Picker_Switcher_Client</code> script.</p>
-<p>It's important that this script has a reference to the <code>Advanced_Color_Picker_Client</code> script so we can call the <code>set_mesh_root</code> method.  </p>
-<p><img alt="" src="../../images/example_4.png" /></p>
-<p>Enter play mode and press <code>P</code>.  You will be able to click on the buttons and switch between the first 3 examples.</p>
-<p><img alt="" src="../../images/example_4b.png" /></p>
+                <h1 id="ui-coloring">UI Coloring</h1>
+<p>This example shows you that some UI components can be modified as well.</p>
+<p>The suported UI elements are:</p>
+<ul>
+<li><code>UI Image</code></li>
+<li><code>UI Text</code></li>
+</ul>
+<p>For folder support, you can use <code>UI Panel</code>.</p>
+<p>It's important to note that the <code>Mesh Root</code> in this case is a <code>UI Container</code> (in the example it is called <code>UI Root</code>).  Look at the example folder structure to see how to set it up yourself.</p>
+<p>Enter play mode and press <code>P</code>.  You should see a list of the UI elements that can be modified.  </p>
+<p>The setup is pretty much like <code>Mesh Objects</code> only using UI components.</p>
+<p><img alt="" src="../../images/example7.png" /></p>
                 
               
               
@@ -600,7 +605,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../example3/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../example6/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -609,25 +614,11 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Ignoring Mesh Objects
+                Syncing Colors with Clients
               </div>
             </div>
           </a>
         
-        
-          <a href="../example5/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Saving Colors
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
         
       </nav>
     </div>
