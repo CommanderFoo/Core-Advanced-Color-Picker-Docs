@@ -43,6 +43,8 @@ nav:
 markdown_extensions:
   - pymdownx.highlight:
       linenums: true
+  - pymdownx.keys:
+      camel_case: true
   - pymdownx.superfences
   - markdown.extensions.codehilite:
       guess_lang: false
